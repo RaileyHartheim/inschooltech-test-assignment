@@ -61,6 +61,5 @@ urlpatterns = [
     path('scores/', ScoreListCreateView.as_view(), name='score-list'),
     path('scores/<uuid:id>/', ScoreObjectView.as_view(), name='score-detail'),
     path('', include('djoser.urls')),
-    path('auth/', include('djoser.urls.authtoken')),
-    path('auth/', include('djoser.urls.jwt')),
+    path('auth/', include('djoser.urls.authtoken'))
 ]
