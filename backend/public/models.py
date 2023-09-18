@@ -20,10 +20,14 @@ class Lab(SoftDeletionModel):
 
 class Test(SoftDeletionModel):
     started_at = models.DateTimeField(
-        verbose_name="test started at"
+        verbose_name="test started at",
+        blank=True,
+        null=True
     )
     completed_at = models.DateTimeField(
-        verbose_name="test completed at"
+        verbose_name="test completed at",
+        blank=True,
+        null=True
     )
     comment = models.TextField(
         blank=True,
