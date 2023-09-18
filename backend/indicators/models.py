@@ -61,7 +61,7 @@ class IndicatorMetric(SoftDeletionModel):
         verbose_name_plural = "indicator - metric pairs"
 
     def __str__(self) -> str:
-        return f"indicator: {self.indicator.name}, metric: {self.metric.name}"
+        return f"indicator: {self.indicator_id.name}, metric: {self.metric_id.name}"
 
 
 class Score(SoftDeletionModel):
@@ -83,6 +83,7 @@ class Score(SoftDeletionModel):
     class Meta:
         verbose_name = "score"
         verbose_name_plural = "scores"
+        unique_together = ("indicator_metric_id", "test_id",)
 
     def __str__(self) -> str:
         return f"score for test {self.test_id}"
@@ -101,7 +102,8 @@ class Reference(SoftDeletionModel):
     )
     indicator_metric_id = models.ForeignKey(
         IndicatorMetric,
-        on_delete=models.PROTECT
+        on_delete=models.PROTECT,
+        unique=True
     )
 
     def __str__(self) -> str:
