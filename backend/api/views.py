@@ -1,7 +1,3 @@
-from django.utils import timezone
-from rest_framework import exceptions, status
-from rest_framework.decorators import action
-from rest_framework.response import Response
 from rest_framework.viewsets import generics
 
 from indicators.models import (Indicator, IndicatorMetric,
@@ -44,48 +40,6 @@ class TestObjectView(generics.RetrieveUpdateDestroyAPIView):
         if self.request.method == "GET":
             return TestSerializer
         return TestCreateSerializer
-
-    @action(methods=["post"], detail=True)
-    def start_test(self, request):
-        try:
-            test = self.get_object()
-            if test.completed_at:
-                data = {"error": "Test was already completed"}
-                return Response(
-                    data=data,
-                    status=status.HTTP_400_BAD_REQUEST
-                )
-            test.started_at = timezone.now()
-            test.save()
-            return Response(
-                {"message": "Test started successfully"},
-                status=status.HTTP_200_OK
-            )
-        except Test.DoesNotExist:
-            exc = exceptions.NotFound()
-            data = {"error": exc.detail}
-            return Response(data=data, status=exc.status_code)
-
-    @action(methods=["post"], detail=True)
-    def complete_test(self, request):
-        try:
-            test = self.get_object()
-            if not test.started_at:
-                data = {"error": "Test wasn't started"}
-                return Response(
-                    data=data,
-                    status=status.HTTP_400_BAD_REQUEST
-                )
-            test.completed_at = timezone.now()
-            test.save()
-            return Response(
-                {"message": "Test completed successfully"},
-                status=status.HTTP_200_OK
-            )
-        except Test.DoesNotExist:
-            exc = exceptions.NotFound()
-            data = {"error": exc.detail}
-            return Response(data=data, status=exc.status_code)
 
 
 class IndicatorListCreateView(generics.ListCreateAPIView):
