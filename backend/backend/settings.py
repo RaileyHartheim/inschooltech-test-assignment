@@ -10,7 +10,7 @@ load_dotenv(find_dotenv())
 
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -27,7 +27,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'djoser',
-    'drf_yasg2',
+    'drf_yasg',
     'api.apps.ApiConfig',
     'core.apps.CoreConfig',
     'indicators.apps.IndicatorsConfig',
