@@ -37,6 +37,7 @@ class IndicatorMetricSerializer(serializers.ModelSerializer):
     class Meta:
         model = IndicatorMetric
         fields = (
+            "id",
             "indicator_id",
             "indicator_name",
             "metric_id",
@@ -170,6 +171,8 @@ class TestSerializer(serializers.ModelSerializer):
         )
 
     def get_duration_seconds(self, obj):
+        if not obj.started_at and not obj.completed_at:
+            return 0
 
         start_time = obj.started_at if obj.started_at else timezone.now()
         completion_time = obj.completed_at if obj.completed_at else timezone.now()

@@ -13,10 +13,10 @@ app_name = 'api'
 
 urlpatterns = [
     path('labs/', LabListCreateView.as_view(), name='lab-list'),
-    path('labs/<uuid:id>/', LabObjectView.as_view(), name='lab-detail'),
+    path('labs/<uuid:pk>/', LabObjectView.as_view(), name='lab-detail'),
 
     path('tests/', TestListCreateView.as_view(), name='test-list'),
-    path('tests/<uuid:id>/', TestObjectView.as_view(), name='test-detail'),
+    path('tests/<uuid:pk>/', TestObjectView.as_view(), name='test-detail'),
 
     path(
         'indicators/',
@@ -24,14 +24,14 @@ urlpatterns = [
         name='indicator-list'
     ),
     path(
-        'indicators/<uuid:id>/',
+        'indicators/<uuid:pk>/',
         IndicatorObjectView.as_view(),
         name='indicator-detail'
     ),
 
     path('metrics/', MetricListCreateView.as_view(), name='metric-list'),
     path(
-        'metrics/<uuid:id>/',
+        'metrics/<uuid:pk>/',
         MetricObjectView.as_view(),
         name='metric-detail'
     ),
@@ -42,7 +42,7 @@ urlpatterns = [
         name='indicator-metric-list'
     ),
     path(
-        'indicator-metric/<uuid:id>/',
+        'indicator-metric/<uuid:pk>/',
         IndicatorMetricObjectView.as_view(),
         name='indicator-metric-detail'
     ),
@@ -53,13 +53,13 @@ urlpatterns = [
         name='reference-list'
     ),
     path(
-        'references/<uuid:id>/',
+        'references/<uuid:pk>/',
         ReferenceObjectView.as_view(),
         name='reference-detail'
     ),
 
     path('scores/', ScoreListCreateView.as_view(), name='score-list'),
-    path('scores/<uuid:id>/', ScoreObjectView.as_view(), name='score-detail'),
+    path('scores/<uuid:pk>/', ScoreObjectView.as_view(), name='score-detail'),
     path('', include('djoser.urls')),
     path('auth/', include('djoser.urls.authtoken'))
 ]

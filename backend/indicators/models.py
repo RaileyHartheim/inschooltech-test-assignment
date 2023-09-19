@@ -18,6 +18,7 @@ class Indicator(SoftDeletionModel):
     class Meta:
         verbose_name = "indicators"
         verbose_name_plural = "indicators"
+        ordering = ("name",)
 
     def __str__(self) -> str:
         return self.name
@@ -41,6 +42,7 @@ class Metric(SoftDeletionModel):
     class Meta:
         verbose_name = "metric"
         verbose_name_plural = "metrics"
+        ordering = ("name",)
 
     def __str__(self) -> str:
         return self.name
@@ -105,6 +107,10 @@ class Reference(SoftDeletionModel):
         on_delete=models.PROTECT,
         unique=True
     )
+
+    class Meta:
+        verbose_name = "reference"
+        verbose_name_plural = "references"
 
     def __str__(self) -> str:
         return f"reference for indicator-metric pair {self.indicator_metric_id}"
